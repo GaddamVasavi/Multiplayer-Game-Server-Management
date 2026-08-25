@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, Users, Trophy, Zap, LogOut, Activity, User, ShoppingBag, Award, Shield } from 'lucide-react';
+import { Play, Users, Trophy, Zap, LogOut, Activity, User, ShoppingBag, Award, Shield, UserPlus } from 'lucide-react';
 
 interface LobbyProps {
   user: any;
@@ -13,6 +13,8 @@ interface LobbyProps {
   onNavigateShop: () => void;
   onNavigateAchievements: () => void;
   onNavigateTournament: () => void;
+  onNavigateFriends: () => void;
+  onNavigateParty: () => void;
 }
 
 export const Lobby: React.FC<LobbyProps> = ({
@@ -27,6 +29,8 @@ export const Lobby: React.FC<LobbyProps> = ({
   onNavigateShop,
   onNavigateAchievements,
   onNavigateTournament,
+  onNavigateFriends,
+  onNavigateParty,
 }) => {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
@@ -57,6 +61,20 @@ export const Lobby: React.FC<LobbyProps> = ({
           >
             <User className="w-3.5 h-3.5" />
             <span>Profile</span>
+          </button>
+          <button
+            onClick={onNavigateFriends}
+            className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 text-slate-300 hover:text-cyan-400 text-xs font-semibold flex items-center space-x-1 transition"
+          >
+            <UserPlus className="w-3.5 h-3.5" />
+            <span>Friends</span>
+          </button>
+          <button
+            onClick={onNavigateParty}
+            className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-purple-500/50 text-slate-300 hover:text-purple-400 text-xs font-semibold flex items-center space-x-1 transition"
+          >
+            <Users className="w-3.5 h-3.5" />
+            <span>Party</span>
           </button>
           <button
             onClick={onNavigateShop}

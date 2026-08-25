@@ -9,11 +9,13 @@ import { DevOpsDashboardPage } from './components/DevOpsDashboardPage';
 import { ShopPage } from './components/ShopPage';
 import { AchievementsPage } from './components/AchievementsPage';
 import { TournamentPage } from './components/TournamentPage';
+import { FriendsPage } from './components/FriendsPage';
+import { PartyPage } from './components/PartyPage';
 import { socketService } from './game/socket/socket.service';
 import { ArenaScene } from './game/scenes/ArenaScene';
 import axios from 'axios';
 
-type ViewMode = 'LOBBY' | 'PROFILE' | 'LEADERBOARD' | 'DEVOPS' | 'SHOP' | 'ACHIEVEMENTS' | 'TOURNAMENT';
+type ViewMode = 'LOBBY' | 'PROFILE' | 'LEADERBOARD' | 'DEVOPS' | 'SHOP' | 'ACHIEVEMENTS' | 'TOURNAMENT' | 'FRIENDS' | 'PARTY';
 
 export default function App() {
   const [user, setUser] = useState<any>(null);
@@ -186,6 +188,10 @@ export default function App() {
           <AchievementsPage onBack={() => setView('LOBBY')} />
         ) : view === 'TOURNAMENT' ? (
           <TournamentPage onBack={() => setView('LOBBY')} />
+        ) : view === 'FRIENDS' ? (
+          <FriendsPage onBack={() => setView('LOBBY')} />
+        ) : view === 'PARTY' ? (
+          <PartyPage onBack={() => setView('LOBBY')} />
         ) : (
           <Lobby
             user={user}
@@ -199,6 +205,8 @@ export default function App() {
             onNavigateShop={() => setView('SHOP')}
             onNavigateAchievements={() => setView('ACHIEVEMENTS')}
             onNavigateTournament={() => setView('TOURNAMENT')}
+            onNavigateFriends={() => setView('FRIENDS')}
+            onNavigateParty={() => setView('PARTY')}
           />
         )}
       </main>

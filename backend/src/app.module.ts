@@ -13,6 +13,8 @@ import { InventoryModule } from './inventory/inventory.module';
 import { TournamentModule } from './tournament/tournament.module';
 import { SeasonPassModule } from './season_pass/season_pass.module';
 import { ReportsModule } from './reports/reports.module';
+import { FriendsModule } from './friends/friends.module';
+import { PartyModule } from './party/party.module';
 import { getPostgresConfig } from './database/database.config';
 
 @Module({
@@ -36,6 +38,8 @@ import { getPostgresConfig } from './database/database.config';
     TournamentModule,
     SeasonPassModule,
     ReportsModule,
+    FriendsModule,
+    PartyModule,
   ],
 })
 export class AppModule {}
