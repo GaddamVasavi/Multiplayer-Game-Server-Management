@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-ai-engine
+  labels:
+    app: {{ .Release.Name }}-ai-engine
+spec:
+  replicas: {{ .Values.replicaCount.ai }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-ai-engine
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-ai-engine
+    spec:
+      containers:
+        - name: ai-engine
+          image: "{{ .Values.image.repository }}/ai-engine:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.aiPort }}
+          resources:
+            limits:
+              cpu: {{ .Values.resources.ai.limits.cpu }}
+              memory: {{ .Values.resources.ai.limits.memory }}
+            requests:
+              cpu: {{ .Values.resources.ai.requests.cpu }}
+              memory: {{ .Values.resources.ai.requests.memory }}
