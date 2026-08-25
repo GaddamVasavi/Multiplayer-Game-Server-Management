@@ -25,6 +25,7 @@ import { ReplayModule } from './replay/replay.module';
 import { AdminModule } from './admin/admin.module';
 import { RegionsModule } from './regions/regions.module';
 import { FailoverModule } from './failover/failover.module';
+import { DisasterRecoveryModule } from './disaster_recovery/disaster_recovery.module';
 import { getPostgresConfig } from './database/database.config';
 
 @Module({
@@ -60,6 +61,7 @@ import { getPostgresConfig } from './database/database.config';
     AdminModule,
     RegionsModule,
     FailoverModule,
+    DisasterRecoveryModule,
   ],
 })
 export class AppModule {}
