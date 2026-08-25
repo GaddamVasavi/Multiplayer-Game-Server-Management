@@ -11,6 +11,8 @@ import { ChatModule } from './chat/chat.module';
 import { AchievementsModule } from './achievements/achievements.module';
 import { InventoryModule } from './inventory/inventory.module';
 import { TournamentModule } from './tournament/tournament.module';
+import { SeasonPassModule } from './season_pass/season_pass.module';
+import { ReportsModule } from './reports/reports.module';
 import { getPostgresConfig } from './database/database.config';
 
 @Module({
@@ -32,6 +34,8 @@ import { getPostgresConfig } from './database/database.config';
     AchievementsModule,
     InventoryModule,
     TournamentModule,
+    SeasonPassModule,
+    ReportsModule,
   ],
 })
 export class AppModule {}
