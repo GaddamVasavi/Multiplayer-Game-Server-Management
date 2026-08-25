@@ -7,6 +7,10 @@ import { MatchmakingModule } from './matchmaking/matchmaking.module';
 import { GameModule } from './game/game.module';
 import { LeaderboardModule } from './leaderboard/leaderboard.module';
 import { AnalyticsModule } from './analytics/analytics.module';
+import { ChatModule } from './chat/chat.module';
+import { AchievementsModule } from './achievements/achievements.module';
+import { InventoryModule } from './inventory/inventory.module';
+import { TournamentModule } from './tournament/tournament.module';
 import { getPostgresConfig } from './database/database.config';
 
 @Module({
@@ -24,6 +28,10 @@ import { getPostgresConfig } from './database/database.config';
     GameModule,
     LeaderboardModule,
     AnalyticsModule,
+    ChatModule,
+    AchievementsModule,
+    InventoryModule,
+    TournamentModule,
   ],
 })
 export class AppModule {}

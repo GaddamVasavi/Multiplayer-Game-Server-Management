@@ -1,15 +1,24 @@
 import { useState, useEffect, useRef } from 'react';
-import { Shield, Trophy, Activity, RefreshCw } from 'lucide-react';
+import { Shield, Trophy, RefreshCw } from 'lucide-react';
 import { AuthModal } from './components/AuthModal';
 import { Lobby } from './components/Lobby';
 import { GameCanvas } from './components/GameCanvas';
+import { ProfilePage } from './components/ProfilePage';
+import { LeaderboardPage } from './components/LeaderboardPage';
+import { DevOpsDashboardPage } from './components/DevOpsDashboardPage';
+import { ShopPage } from './components/ShopPage';
+import { AchievementsPage } from './components/AchievementsPage';
+import { TournamentPage } from './components/TournamentPage';
 import { socketService } from './game/socket/socket.service';
 import { ArenaScene } from './game/scenes/ArenaScene';
 import axios from 'axios';
 
+type ViewMode = 'LOBBY' | 'PROFILE' | 'LEADERBOARD' | 'DEVOPS' | 'SHOP' | 'ACHIEVEMENTS' | 'TOURNAMENT';
+
 export default function App() {
   const [user, setUser] = useState<any>(null);
   const [token, setToken] = useState<string | null>(localStorage.getItem('nexus_jwt_token'));
+  const [view, setView] = useState<ViewMode>('LOBBY');
   const [inQueue, setInQueue] = useState(false);
   const [currentRoom, setCurrentRoom] = useState<string | null>(null);
   const [scores, setScores] = useState<any[]>([]);
@@ -101,7 +110,7 @@ export default function App() {
     <div className="min-h-screen bg-slate-950 flex flex-col justify-between p-4 md:p-6">
       {/* Header */}
       <header className="glass-panel rounded-2xl p-4 px-6 flex items-center justify-between border border-slate-800">
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setView('LOBBY')}>
           <div className="p-2 bg-gradient-to-tr from-cyan-500 to-blue-600 rounded-xl glow-cyan">
             <Shield className="w-6 h-6 text-white" />
           </div>
@@ -165,6 +174,18 @@ export default function App() {
               </button>
             </div>
           </div>
+        ) : view === 'PROFILE' ? (
+          <ProfilePage user={user} onBack={() => setView('LOBBY')} />
+        ) : view === 'LEADERBOARD' ? (
+          <LeaderboardPage onBack={() => setView('LOBBY')} />
+        ) : view === 'DEVOPS' ? (
+          <DevOpsDashboardPage onBack={() => setView('LOBBY')} />
+        ) : view === 'SHOP' ? (
+          <ShopPage user={user} onBack={() => setView('LOBBY')} />
+        ) : view === 'ACHIEVEMENTS' ? (
+          <AchievementsPage onBack={() => setView('LOBBY')} />
+        ) : view === 'TOURNAMENT' ? (
+          <TournamentPage onBack={() => setView('LOBBY')} />
         ) : (
           <Lobby
             user={user}
@@ -172,6 +193,12 @@ export default function App() {
             onJoinQueue={handleJoinQueue}
             onLeaveQueue={handleLeaveQueue}
             onLogout={handleLogout}
+            onNavigateProfile={() => setView('PROFILE')}
+            onNavigateLeaderboard={() => setView('LEADERBOARD')}
+            onNavigateDevOps={() => setView('DEVOPS')}
+            onNavigateShop={() => setView('SHOP')}
+            onNavigateAchievements={() => setView('ACHIEVEMENTS')}
+            onNavigateTournament={() => setView('TOURNAMENT')}
           />
         )}
       </main>

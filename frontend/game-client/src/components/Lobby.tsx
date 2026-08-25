@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, Users, Trophy, Zap, LogOut } from 'lucide-react';
+import { Play, Users, Trophy, Zap, LogOut, Activity, User, ShoppingBag, Award, Shield } from 'lucide-react';
 
 interface LobbyProps {
   user: any;
@@ -7,6 +7,12 @@ interface LobbyProps {
   onJoinQueue: () => void;
   onLeaveQueue: () => void;
   onLogout: () => void;
+  onNavigateProfile: () => void;
+  onNavigateLeaderboard: () => void;
+  onNavigateDevOps: () => void;
+  onNavigateShop: () => void;
+  onNavigateAchievements: () => void;
+  onNavigateTournament: () => void;
 }
 
 export const Lobby: React.FC<LobbyProps> = ({
@@ -15,6 +21,12 @@ export const Lobby: React.FC<LobbyProps> = ({
   onJoinQueue,
   onLeaveQueue,
   onLogout,
+  onNavigateProfile,
+  onNavigateLeaderboard,
+  onNavigateDevOps,
+  onNavigateShop,
+  onNavigateAchievements,
+  onNavigateTournament,
 }) => {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
@@ -38,13 +50,57 @@ export const Lobby: React.FC<LobbyProps> = ({
           </div>
         </div>
 
-        <button
-          onClick={onLogout}
-          className="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-rose-500/50 text-slate-400 hover:text-rose-400 text-xs font-semibold flex items-center space-x-1.5 transition"
-        >
-          <LogOut className="w-4 h-4" />
-          <span>Sign Out</span>
-        </button>
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            onClick={onNavigateProfile}
+            className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 text-slate-300 hover:text-cyan-400 text-xs font-semibold flex items-center space-x-1 transition"
+          >
+            <User className="w-3.5 h-3.5" />
+            <span>Profile</span>
+          </button>
+          <button
+            onClick={onNavigateShop}
+            className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 text-slate-300 hover:text-cyan-400 text-xs font-semibold flex items-center space-x-1 transition"
+          >
+            <ShoppingBag className="w-3.5 h-3.5" />
+            <span>Shop</span>
+          </button>
+          <button
+            onClick={onNavigateAchievements}
+            className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-amber-500/50 text-slate-300 hover:text-amber-400 text-xs font-semibold flex items-center space-x-1 transition"
+          >
+            <Award className="w-3.5 h-3.5" />
+            <span>Badges</span>
+          </button>
+          <button
+            onClick={onNavigateTournament}
+            className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-purple-500/50 text-slate-300 hover:text-purple-400 text-xs font-semibold flex items-center space-x-1 transition"
+          >
+            <Shield className="w-3.5 h-3.5" />
+            <span>Brackets</span>
+          </button>
+          <button
+            onClick={onNavigateLeaderboard}
+            className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-amber-500/50 text-slate-300 hover:text-amber-400 text-xs font-semibold flex items-center space-x-1 transition"
+          >
+            <Trophy className="w-3.5 h-3.5" />
+            <span>Leaderboard</span>
+          </button>
+          <button
+            onClick={onNavigateDevOps}
+            className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-purple-500/50 text-slate-300 hover:text-purple-400 text-xs font-semibold flex items-center space-x-1 transition"
+          >
+            <Activity className="w-3.5 h-3.5" />
+            <span>AI DevOps</span>
+          </button>
+          <button
+            onClick={onLogout}
+            className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-rose-500/50 text-slate-400 hover:text-rose-400 text-xs font-semibold flex items-center space-x-1 transition"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+            <span>Sign Out</span>
+          </button>
+        </div>
       </div>
 
       {/* Matchmaking Action Section */}
