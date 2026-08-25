@@ -4,13 +4,13 @@ Provides REST API endpoints for traffic prediction, metric anomaly detection,
 and intelligent Kubernetes auto-scaling calculations.
 """
 
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
-from typing import List, Optional, Dict, Any
+from pydantic import BaseModel
 import uvicorn
 import logging
 import os
+from api.scaling_routes import router as ai_router
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger("AI-Service")
@@ -28,6 +28,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(ai_router)
 
 class HealthResponse(BaseModel):
     status: str

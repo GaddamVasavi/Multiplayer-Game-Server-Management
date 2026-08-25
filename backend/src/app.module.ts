@@ -5,6 +5,8 @@ import { AuthModule } from './auth/auth.module';
 import { PlayersModule } from './players/players.module';
 import { MatchmakingModule } from './matchmaking/matchmaking.module';
 import { GameModule } from './game/game.module';
+import { LeaderboardModule } from './leaderboard/leaderboard.module';
+import { AnalyticsModule } from './analytics/analytics.module';
 import { getPostgresConfig } from './database/database.config';
 
 @Module({
@@ -20,6 +22,8 @@ import { getPostgresConfig } from './database/database.config';
     PlayersModule,
     MatchmakingModule,
     GameModule,
+    LeaderboardModule,
+    AnalyticsModule,
   ],
 })
 export class AppModule {}
