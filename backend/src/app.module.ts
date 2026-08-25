@@ -21,6 +21,7 @@ import { QuestsModule } from './quests/quests.module';
 import { MailModule } from './mail/mail.module';
 import { VoiceModule } from './voice/voice.module';
 import { AntiCheatModule } from './anti_cheat/anti_cheat.module';
+import { ReplayModule } from './replay/replay.module';
 import { getPostgresConfig } from './database/database.config';
 
 @Module({
@@ -52,6 +53,7 @@ import { getPostgresConfig } from './database/database.config';
     MailModule,
     VoiceModule,
     AntiCheatModule,
+    ReplayModule,
   ],
 })
 export class AppModule {}
