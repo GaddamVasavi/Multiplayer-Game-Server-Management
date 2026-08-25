@@ -27,6 +27,7 @@ import { RegionsModule } from './regions/regions.module';
 import { FailoverModule } from './failover/failover.module';
 import { DisasterRecoveryModule } from './disaster_recovery/disaster_recovery.module';
 import { EconomyModule } from './economy/economy.module';
+import { EventsModule } from './events/events.module';
 import { getPostgresConfig } from './database/database.config';
 
 @Module({
@@ -64,6 +65,7 @@ import { getPostgresConfig } from './database/database.config';
     FailoverModule,
     DisasterRecoveryModule,
     EconomyModule,
+    EventsModule,
   ],
 })
 export class AppModule {}
