@@ -1,0 +1,9 @@
+apiVersion: v2
+name: nexus-arena
+description: Enterprise Helm Chart for AI-Based Intelligent Game Server & Predictive Auto-Scaling Platform
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+maintainers:
+  - name: Antigravity DevOps Team
+    email: devops@nexus-arena.io

@@ -16,6 +16,9 @@ import { ReportsModule } from './reports/reports.module';
 import { FriendsModule } from './friends/friends.module';
 import { PartyModule } from './party/party.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { GuildsModule } from './guilds/guilds.module';
+import { QuestsModule } from './quests/quests.module';
+import { MailModule } from './mail/mail.module';
 import { getPostgresConfig } from './database/database.config';
 
 @Module({
@@ -42,6 +45,9 @@ import { getPostgresConfig } from './database/database.config';
     FriendsModule,
     PartyModule,
     NotificationsModule,
+    GuildsModule,
+    QuestsModule,
+    MailModule,
   ],
 })
 export class AppModule {}
