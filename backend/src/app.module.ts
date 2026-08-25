@@ -22,6 +22,7 @@ import { MailModule } from './mail/mail.module';
 import { VoiceModule } from './voice/voice.module';
 import { AntiCheatModule } from './anti_cheat/anti_cheat.module';
 import { ReplayModule } from './replay/replay.module';
+import { AdminModule } from './admin/admin.module';
 import { getPostgresConfig } from './database/database.config';
 
 @Module({
@@ -54,6 +55,7 @@ import { getPostgresConfig } from './database/database.config';
     VoiceModule,
     AntiCheatModule,
     ReplayModule,
+    AdminModule,
   ],
 })
 export class AppModule {}
