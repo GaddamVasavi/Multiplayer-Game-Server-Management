@@ -3,6 +3,12 @@ PyTest Test Suite for AI Engine (Mandatory Test 5: AI Scaling Decision)
 Validates Traffic Forecasting, Anomaly Detection Scoring, and Kubernetes Scaling Calculations.
 """
 
+import sys
+import os
+
+# Add parent directory to sys.path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import pytest
 from prediction.traffic_predictor import TrafficPredictor
 from anomaly_detection.anomaly_detector import MetricAnomalyDetector
@@ -47,13 +53,13 @@ def test_anomaly_detector_cpu_spike_anomaly():
     assert result["is_anomalous"] == True
     assert "Extreme CPU Usage Spike (>90%)" in result["reasons"]
 
-def test_ai_scaling_decision_scale_up_trigger(mandatory_test_5=True):
+def test_ai_scaling_decision_scale_up_trigger():
     """
     Mandatory Test 5: Verify AI scaling decision algorithm when predicted traffic exceeds pod capacity.
     """
     scaler = ScalingEngine(capacity_per_pod=50, min_pods=2, max_pods=20, safety_buffer=0.20)
     
-    # Test 1: Current 2 pods (capacity 100). Predicted traffic: 180 players.
+    # Current 2 pods (capacity 100). Predicted traffic: 180 players.
     # Buffered players = 180 * 1.20 = 216 -> ceil(216 / 50) = 5 pods.
     decision = scaler.calculate_scaling_decision(
         current_pods=2,

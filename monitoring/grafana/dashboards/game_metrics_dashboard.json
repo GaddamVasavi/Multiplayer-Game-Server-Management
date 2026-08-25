@@ -1,0 +1,46 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Active Concurrent Players",
+      "gridPos": { "h": 6, "w": 6, "x": 0, "y": 0 },
+      "targets": [{ "expr": "game_active_players", "legendFormat": "Players" }]
+    },
+    {
+      "type": "stat",
+      "title": "Active Arena Rooms",
+      "gridPos": { "h": 6, "w": 6, "x": 6, "y": 0 },
+      "targets": [{ "expr": "game_active_rooms", "legendFormat": "Rooms" }]
+    },
+    {
+      "type": "timeseries",
+      "title": "Pod CPU & Memory Utilization",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "targets": [
+        { "expr": "game_cpu_usage_percent", "legendFormat": "CPU %" },
+        { "expr": "game_memory_usage_bytes / 1024 / 1024", "legendFormat": "Memory MB" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Tick Latency Distribution (Seconds)",
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 8 },
+      "targets": [
+        { "expr": "rate(game_request_latency_seconds_sum[1m]) / rate(game_request_latency_seconds_count[1m])", "legendFormat": "Average Latency" }
+      ]
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["game", "telemetry"],
+  "time": { "from": "now-15m", "to": "now" },
+  "title": "Nexus Arena - Real-time Telemetry Dashboard"
+}

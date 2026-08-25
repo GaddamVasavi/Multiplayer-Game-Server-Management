@@ -1,0 +1,29 @@
+groups:
+  - name: game_server_alerts
+    rules:
+      - alert: HighServerCPUUsage
+        expr: game_cpu_usage_percent > 85
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "High CPU Usage on Game Server Pod"
+          description: "Game Server pod CPU usage has exceeded 85% for 30 seconds."
+
+      - alert: HighLatencySpike
+        expr: game_request_latency_seconds_bucket{le="0.25"} < 0.8
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Game Tick Latency Degradation"
+          description: "Over 20% of requests are experiencing latency above 250ms."
+
+      - alert: TrafficSurgeDetected
+        expr: rate(game_active_players[1m]) > 5
+        for: 15s
+        labels:
+          severity: info
+        annotations:
+          summary: "Rapid Player Influx Detected"
+          description: "Active player count is scaling rapidly (>5 players/min)."

@@ -1,0 +1,35 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "graphTooltip": 0,
+  "id": 2,
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Predicted vs Actual Player Load (Prophet/LSTM)",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "targets": [
+        { "expr": "game_active_players", "legendFormat": "Actual Players" },
+        { "expr": "predicted_player_traffic", "legendFormat": "AI 5m Forecast" }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Target Pod Count (Auto-Scaler)",
+      "gridPos": { "h": 8, "w": 6, "x": 12, "y": 0 },
+      "targets": [{ "expr": "kube_deployment_status_replicas_ready{deployment='game-backend-deployment'}", "legendFormat": "Current Pods" }]
+    },
+    {
+      "type": "stat",
+      "title": "Anomaly Score (Isolation Forest)",
+      "gridPos": { "h": 8, "w": 6, "x": 18, "y": 0 },
+      "targets": [{ "expr": "ai_metric_anomaly_score", "legendFormat": "Score" }]
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["ai", "scaling", "predictive"],
+  "time": { "from": "now-30m", "to": "now" },
+  "title": "Nexus Arena - AI Auto-Scaling & Anomaly Dashboard"
+}

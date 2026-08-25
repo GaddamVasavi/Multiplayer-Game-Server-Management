@@ -1,0 +1,109 @@
+pipeline {
+    agent any
+
+    environment {
+        REGISTRY = 'registry.nexus-arena.internal'
+        APP_NAME = 'nexus-arena'
+        BUILD_TAG = "${env.BUILD_NUMBER}-${env.GIT_COMMIT.take(7)}"
+        KUBECONFIG = credentials('k8s-kubeconfig')
+    }
+
+    options {
+        timeout(time: 1, unit: 'HOURS')
+        ansiColor('xterm')
+        disableConcurrentBuilds()
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                echo "Checking out commit: ${env.GIT_COMMIT}"
+                checkout scm
+            }
+        }
+
+        stage('Lint & Static Analysis') {
+            steps {
+                dir('backend') {
+                    sh 'npm ci'
+                    sh 'npm run lint'
+                }
+                dir('frontend/game-client') {
+                    sh 'npm ci'
+                    sh 'npm run lint'
+                }
+            }
+        }
+
+        stage('Backend & Game Unit Tests') {
+            steps {
+                dir('backend') {
+                    sh 'npm run test -- --coverage'
+                }
+            }
+        }
+
+        stage('AI Engine PyTest Validation') {
+            steps {
+                dir('ai') {
+                    sh 'python3 -m venv venv'
+                    sh '. venv/bin/activate && pip install -r requirements.txt'
+                    sh '. venv/bin/activate && pytest tests/'
+                }
+            }
+        }
+
+        stage('Docker Image Multi-Stage Builds') {
+            steps {
+                sh "docker build -t ${REGISTRY}/${APP_NAME}-backend:${BUILD_TAG} -f devops/docker/Dockerfile.backend backend/"
+                sh "docker build -t ${REGISTRY}/${APP_NAME}-ai:${BUILD_TAG} -f devops/docker/Dockerfile.ai ai/"
+                sh "docker build -t ${REGISTRY}/${APP_NAME}-frontend:${BUILD_TAG} -f devops/docker/Dockerfile.frontend frontend/game-client/"
+            }
+        }
+
+        stage('Container Image Security Scan') {
+            steps {
+                sh "trivy image --severity HIGH,CRITICAL ${REGISTRY}/${APP_NAME}-backend:${BUILD_TAG} || true"
+                sh "trivy image --severity HIGH,CRITICAL ${REGISTRY}/${APP_NAME}-ai:${BUILD_TAG} || true"
+            }
+        }
+
+        stage('Push to Container Registry') {
+            steps {
+                sh "docker push ${REGISTRY}/${APP_NAME}-backend:${BUILD_TAG}"
+                sh "docker push ${REGISTRY}/${APP_NAME}-ai:${BUILD_TAG}"
+                sh "docker push ${REGISTRY}/${APP_NAME}-frontend:${BUILD_TAG}"
+            }
+        }
+
+        stage('Kubernetes Rolling Deployment') {
+            steps {
+                sh "kubectl set image deployment/game-backend-deployment game-backend=${REGISTRY}/${APP_NAME}-backend:${BUILD_TAG} --record"
+                sh "kubectl set image deployment/ai-engine-deployment ai-engine=${REGISTRY}/${APP_NAME}-ai:${BUILD_TAG} --record"
+                sh "kubectl set image deployment/frontend-deployment frontend=${REGISTRY}/${APP_NAME}-frontend:${BUILD_TAG} --record"
+                sh "kubectl rollout status deployment/game-backend-deployment --timeout=180s"
+            }
+        }
+
+        stage('Post-Deploy Smoke & Health Check') {
+            steps {
+                sh "curl --fail http://nexus-arena.internal/metrics || exit 1"
+                sh "curl --fail http://nexus-arena.internal/ai/health || exit 1"
+                echo "DEPLOYMENT SUCCESSFUL! All health checks passed."
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+        success {
+            echo "Pipeline completed cleanly. Version ${BUILD_TAG} deployed."
+        }
+        failure {
+            echo "Pipeline failed! Rolling back Kubernetes deployments..."
+            sh "kubectl rollout undo deployment/game-backend-deployment || true"
+        }
+    }
+}

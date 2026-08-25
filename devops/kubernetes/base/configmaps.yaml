@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nexus-configmap
+  namespace: default
+data:
+  NODE_ENV: "production"
+  PORT: "4000"
+  DB_HOST: "postgres-service"
+  DB_PORT: "5432"
+  DB_NAME: "nexus_arena_db"
+  REDIS_HOST: "redis-service"
+  REDIS_PORT: "6379"
+  AI_SERVICE_URL: "http://ai-engine-service:8000"
