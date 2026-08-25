@@ -23,6 +23,7 @@ import { VoiceModule } from './voice/voice.module';
 import { AntiCheatModule } from './anti_cheat/anti_cheat.module';
 import { ReplayModule } from './replay/replay.module';
 import { AdminModule } from './admin/admin.module';
+import { RegionsModule } from './regions/regions.module';
 import { getPostgresConfig } from './database/database.config';
 
 @Module({
@@ -56,6 +57,7 @@ import { getPostgresConfig } from './database/database.config';
     AntiCheatModule,
     ReplayModule,
     AdminModule,
+    RegionsModule,
   ],
 })
 export class AppModule {}
