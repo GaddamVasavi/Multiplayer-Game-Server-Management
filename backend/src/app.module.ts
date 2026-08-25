@@ -24,6 +24,7 @@ import { AntiCheatModule } from './anti_cheat/anti_cheat.module';
 import { ReplayModule } from './replay/replay.module';
 import { AdminModule } from './admin/admin.module';
 import { RegionsModule } from './regions/regions.module';
+import { FailoverModule } from './failover/failover.module';
 import { getPostgresConfig } from './database/database.config';
 
 @Module({
@@ -58,6 +59,7 @@ import { getPostgresConfig } from './database/database.config';
     ReplayModule,
     AdminModule,
     RegionsModule,
+    FailoverModule,
   ],
 })
 export class AppModule {}
