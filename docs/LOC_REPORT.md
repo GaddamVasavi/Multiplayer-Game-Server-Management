@@ -9,9 +9,9 @@ Target: **50,000+ meaningful, production-grade Lines of Code (LOC)** across Fron
 
 | Phase | Phase Name | Status | LOC Added | Cumulative LOC | Date Completed | Git Commit ID |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Phase 1** | Setup & Architecture | ✅ Completed | 549 | 549 | 2026-08-25 | `feat(arch): initial project architecture` |
-| **Phase 2** | Database & Authentication | 🟡 In Progress | - | - | - | - |
-| **Phase 3** | Frontend & Player Profiles | ⚪ Planned | - | - | - | - |
+| **Phase 1** | Setup & Architecture | ✅ Completed | 549 | 549 | 2026-08-25 | `97dfc94`: `feat(arch): initial architecture` |
+| **Phase 2** | Database & Authentication | ✅ Completed | 735 | 1,284 | 2026-08-25 | Pending Commit 2 |
+| **Phase 3** | Frontend & Player Profiles | 🟡 In Progress | - | - | - | - |
 | **Phase 4** | Multiplayer Game Engine | ⚪ Planned | - | - | - | - |
 | **Phase 5** | Matchmaking System | ⚪ Planned | - | - | - | - |
 | **Phase 6** | Leaderboard & Analytics | ⚪ Planned | - | - | - | - |
@@ -33,10 +33,10 @@ Target: **50,000+ meaningful, production-grade Lines of Code (LOC)** across Fron
 | Directory / Module | File Count | Lines of Code | Description |
 | :--- | :---: | :---: | :--- |
 | `frontend/game-client` | 7 | 215 | Phaser 3 Game Client & React SPA setup |
-| `backend/` | 3 | 118 | NestJS Server manifests & tsconfig |
+| `backend/` | 19 | 800 | TypeORM entities, Auth module, Players module, Unit tests |
 | `ai/` | 2 | 52 | Python FastAPI baseline service |
 | `devops/` | 3 | 42 | Multi-stage Dockerfiles |
 | `monitoring/` | 0 | 0 | Prometheus Rules, Grafana Dashboards |
 | `tests/` | 0 | 0 | Playwright E2E, k6 Load, Integration Tests |
-| `docs/` | 2 | 122 | Architecture Documentation & Reports |
-| **TOTAL** | **17** | **549** | **Phase 1 Baseline** |
+| `docs/` | 2 | 175 | Architecture Documentation & Reports |
+| **TOTAL** | **33** | **1,284** | **Phase 2 Completion** |
