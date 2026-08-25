@@ -19,6 +19,8 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { GuildsModule } from './guilds/guilds.module';
 import { QuestsModule } from './quests/quests.module';
 import { MailModule } from './mail/mail.module';
+import { VoiceModule } from './voice/voice.module';
+import { AntiCheatModule } from './anti_cheat/anti_cheat.module';
 import { getPostgresConfig } from './database/database.config';
 
 @Module({
@@ -48,6 +50,8 @@ import { getPostgresConfig } from './database/database.config';
     GuildsModule,
     QuestsModule,
     MailModule,
+    VoiceModule,
+    AntiCheatModule,
   ],
 })
 export class AppModule {}
